@@ -1,6 +1,10 @@
 {
   "extends": [
-    "../../../.eslintrc.json"
+    "../../../.eslintrc.json",
+    "plugin:qunit/recommended"
+  ],
+  "plugins": [
+    "qunit"
   ],
   "parserOptions": {
     "ecmaVersion": 5,
