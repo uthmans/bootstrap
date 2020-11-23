@@ -160,8 +160,8 @@ $(function () {
       })
       .one('slid.bs.carousel', function () {
         setTimeout(function () {
-          assert.equal($carousel.find('.carousel-item:nth-child(1)').is('.active'), false, 'first item still active')
-          assert.equal($carousel.find('.carousel-indicators li:nth-child(1)').is('.active'), false, 'first indicator still active')
+          assert.strictEqual($carousel.find('.carousel-item:nth-child(1)').is('.active'), false, 'first item still active')
+          assert.strictEqual($carousel.find('.carousel-indicators li:nth-child(1)').is('.active'), false, 'first indicator still active')
           assert.ok($carousel.find('.carousel-item:nth-child(2)').is('.active'), 'second item active')
           assert.ok($carousel.find('.carousel-indicators li:nth-child(2)').is('.active'), 'second indicator active')
           done()
@@ -1158,7 +1158,7 @@ $(function () {
 
     $carousel.one('slid.bs.carousel', function () {
       assert.ok(true, 'slid event fired')
-      assert.equal($item.hasClass('active'), false)
+      assert.strictEqual($item.hasClass('active'), false)
       assert.ok(spy.called)
       assert.strictEqual(carousel.touchDeltaX, 0)
       $styles.remove()
@@ -1202,7 +1202,7 @@ $(function () {
 
     $carousel.one('slid.bs.carousel', function () {
       assert.ok(true, 'slid event fired')
-      assert.equal($item.hasClass('active'), false)
+      assert.strictEqual($item.hasClass('active'), false)
       assert.ok(spy.called)
       assert.strictEqual(carousel.touchDeltaX, 0)
       restorePointerEvents()

@@ -89,7 +89,7 @@ $(function () {
         $trigger.bootstrapTooltip('hide')
       })
       .one('hidden.bs.tooltip', function () {
-        assert.equal($trigger[0].hasAttribute('aria-describedby'), false, 'trigger does not have aria-describedby')
+        assert.strictEqual($trigger[0].hasAttribute('aria-describedby'), false, 'trigger does not have aria-describedby')
         done()
       })
       .bootstrapTooltip('show')
@@ -165,7 +165,7 @@ $(function () {
       .one('shown.bs.tooltip', function () {
         assert.notStrictEqual($('.tooltip').length, 0, 'tooltip inserted')
         assert.strictEqual($('.tooltip').text(), '<3 writing tests', 'title inserted')
-        assert.equal($.contains($('.tooltip').get(0), title), false, 'title node copied, not moved')
+        assert.strictEqual($.contains($('.tooltip').get(0), title), false, 'title node copied, not moved')
         done()
       })
       .bootstrapTooltip('show')
@@ -345,7 +345,7 @@ $(function () {
     $tooltip.bootstrapTooltip('show')
     $tooltip.bootstrapTooltip('dispose')
 
-    assert.equal($tooltip.hasClass('show'), false, 'tooltip is hidden')
+    assert.strictEqual($tooltip.hasClass('show'), false, 'tooltip is hidden')
     assert.strictEqual(typeof $._data($tooltip[0], 'bs.tooltip'), 'undefined', 'tooltip does not have data')
     assert.strictEqual($._data($tooltip[0], 'events').click[0].namespace, 'foo', 'tooltip still has click.foo')
     assert.ok(!$._data($tooltip[0], 'events').mouseover && !$._data($tooltip[0], 'events').mouseout, 'tooltip does not have hover events')
@@ -579,7 +579,7 @@ $(function () {
       })
 
     setTimeout(function () {
-      assert.equal($('.tooltip').is('.fade.show'), false, '100ms: tooltip is not faded active')
+      assert.strictEqual($('.tooltip').is('.fade.show'), false, '100ms: tooltip is not faded active')
     }, 100)
 
     setTimeout(function () {
@@ -601,12 +601,12 @@ $(function () {
       })
 
     setTimeout(function () {
-      assert.equal($('.tooltip').is('.fade.show'), false, '100ms: tooltip not faded active')
+      assert.strictEqual($('.tooltip').is('.fade.show'), false, '100ms: tooltip not faded active')
       $tooltip.trigger('mouseout')
     }, 100)
 
     setTimeout(function () {
-      assert.equal($('.tooltip').is('.fade.show'), false, '200ms: tooltip not faded active')
+      assert.strictEqual($('.tooltip').is('.fade.show'), false, '200ms: tooltip not faded active')
       done()
     }, 200)
 
@@ -655,12 +655,12 @@ $(function () {
       })
 
     setTimeout(function () {
-      assert.equal($('.tooltip').is('.fade.show'), false, '100ms: tooltip not faded active')
+      assert.strictEqual($('.tooltip').is('.fade.show'), false, '100ms: tooltip not faded active')
       $tooltip.trigger('mouseout')
     }, 100)
 
     setTimeout(function () {
-      assert.equal($('.tooltip').is('.fade.show'), false, '200ms: tooltip not faded active')
+      assert.strictEqual($('.tooltip').is('.fade.show'), false, '200ms: tooltip not faded active')
       done()
     }, 200)
 
@@ -681,12 +681,12 @@ $(function () {
       })
 
     setTimeout(function () {
-      assert.equal($('.tooltip').is('.fade.show'), false, '100ms: tooltip not faded active')
+      assert.strictEqual($('.tooltip').is('.fade.show'), false, '100ms: tooltip not faded active')
       $tooltip.trigger('mouseout')
     }, 100)
 
     setTimeout(function () {
-      assert.equal($('.tooltip').is('.fade.show'), false, '250ms: tooltip not faded active')
+      assert.strictEqual($('.tooltip').is('.fade.show'), false, '250ms: tooltip not faded active')
       done()
     }, 250)
 
@@ -716,7 +716,7 @@ $(function () {
       }, 100)
 
       setTimeout(function () {
-        assert.equal($($tooltip.data('bs.tooltip').tip).is('.show'), false, '200ms: tooltip removed')
+        assert.strictEqual($($tooltip.data('bs.tooltip').tip).is('.show'), false, '200ms: tooltip removed')
         done()
       }, 200)
     }, 0)
@@ -838,7 +838,7 @@ $(function () {
       ['mouseenter', 'focusin', 'click', 'click', 'mouseleave', 'focusout']
     ]
 
-    assert.equal(showingTooltip(), false)
+    assert.strictEqual(showingTooltip(), false)
 
     $.each(tests, function (idx, triggers) {
       for (var i = 0, len = triggers.length; i < len; i++) {
@@ -868,7 +868,7 @@ $(function () {
     assert.ok(showingTooltip(), 'tooltip is faded in')
 
     $el.bootstrapTooltip('hide')
-    assert.equal(showingTooltip(), false, 'tooltip was faded out')
+    assert.strictEqual(showingTooltip(), false, 'tooltip was faded out')
 
     $el.trigger('click')
     assert.ok(showingTooltip(), 'tooltip is faded in again')
