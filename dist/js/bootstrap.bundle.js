@@ -1,5 +1,5 @@
 /*!
-  * Bootstrap v5.0.0-alpha3 (https://getbootstrap.com/)
+  * Bootstrap v5.0.0-beta1 (https://getbootstrap.com/)
   * Copyright 2011-2020 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors)
   * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
   */
@@ -51,7 +51,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-alpha3): util/index.js
+   * Bootstrap (v5.0.0-beta1): util/index.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -234,7 +234,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-alpha3): dom/data.js
+   * Bootstrap (v5.0.0-beta1): dom/data.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -301,7 +301,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-alpha3): dom/event-handler.js
+   * Bootstrap (v5.0.0-beta1): dom/event-handler.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -581,7 +581,7 @@
    */
 
   var NAME = 'alert';
-  var VERSION = '5.0.0-alpha3';
+  var VERSION = '5.0.0-beta1';
   var DATA_KEY = 'bs.alert';
   var EVENT_KEY = "." + DATA_KEY;
   var DATA_API_KEY = '.data-api';
@@ -739,7 +739,7 @@
    */
 
   var NAME$1 = 'button';
-  var VERSION$1 = '5.0.0-alpha3';
+  var VERSION$1 = '5.0.0-beta1';
   var DATA_KEY$1 = 'bs.button';
   var EVENT_KEY$1 = "." + DATA_KEY$1;
   var DATA_API_KEY$1 = '.data-api';
@@ -843,7 +843,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-alpha3): dom/manipulator.js
+   * Bootstrap (v5.0.0-beta1): dom/manipulator.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -915,7 +915,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-alpha3): dom/selector-engine.js
+   * Bootstrap (v5.0.0-beta1): dom/selector-engine.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -1004,7 +1004,7 @@
    */
 
   var NAME$2 = 'carousel';
-  var VERSION$2 = '5.0.0-alpha3';
+  var VERSION$2 = '5.0.0-beta1';
   var DATA_KEY$2 = 'bs.carousel';
   var EVENT_KEY$2 = "." + DATA_KEY$2;
   var DATA_API_KEY$2 = '.data-api';
@@ -1615,7 +1615,7 @@
    */
 
   var NAME$3 = 'collapse';
-  var VERSION$3 = '5.0.0-alpha3';
+  var VERSION$3 = '5.0.0-beta1';
   var DATA_KEY$3 = 'bs.collapse';
   var EVENT_KEY$3 = "." + DATA_KEY$3;
   var DATA_API_KEY$3 = '.data-api';
@@ -4631,7 +4631,7 @@
    */
 
   var NAME$4 = 'dropdown';
-  var VERSION$4 = '5.0.0-alpha3';
+  var VERSION$4 = '5.0.0-beta1';
   var DATA_KEY$4 = 'bs.dropdown';
   var EVENT_KEY$4 = "." + DATA_KEY$4;
   var DATA_API_KEY$4 = '.data-api';
@@ -5139,7 +5139,7 @@
    */
 
   var NAME$5 = 'modal';
-  var VERSION$5 = '5.0.0-alpha3';
+  var VERSION$5 = '5.0.0-beta1';
   var DATA_KEY$5 = 'bs.modal';
   var EVENT_KEY$5 = "." + DATA_KEY$5;
   var DATA_API_KEY$5 = '.data-api';
@@ -5765,7 +5765,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-alpha3): util/sanitizer.js
+   * Bootstrap (v5.0.0-beta1): util/sanitizer.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -5897,7 +5897,7 @@
    */
 
   var NAME$6 = 'tooltip';
-  var VERSION$6 = '5.0.0-alpha3';
+  var VERSION$6 = '5.0.0-beta1';
   var DATA_KEY$6 = 'bs.tooltip';
   var EVENT_KEY$6 = "." + DATA_KEY$6;
   var CLASS_PREFIX = 'bs-tooltip';
@@ -5916,6 +5916,7 @@
     container: '(string|element|boolean)',
     fallbackPlacement: '(string|array)',
     boundary: '(string|element)',
+    customClass: '(string|function)',
     sanitize: 'boolean',
     sanitizeFn: '(null|function)',
     allowList: 'object',
@@ -5941,6 +5942,7 @@
     container: false,
     fallbackPlacement: 'flip',
     boundary: 'scrollParent',
+    customClass: '',
     sanitize: true,
     sanitizeFn: null,
     allowList: DefaultAllowlist,
@@ -6111,10 +6113,18 @@
 
         EventHandler.trigger(this.element, this.constructor.Event.INSERTED);
         this._popper = new Popper(this.element, tip, this._getPopperConfig(attachment));
-        tip.classList.add(CLASS_NAME_SHOW$3); // If this is a touch-enabled device we add extra
+        tip.classList.add(CLASS_NAME_SHOW$3);
+        var customClass = typeof this.config.customClass === 'function' ? this.config.customClass() : this.config.customClass;
+
+        if (customClass) {
+          var _tip$classList;
+
+          (_tip$classList = tip.classList).add.apply(_tip$classList, customClass.split(' '));
+        } // If this is a touch-enabled device we add extra
         // empty mouseover listeners to the body's immediate children;
         // only needed because of broken event delegation on iOS
         // https://www.quirksmode.org/blog/archives/2014/02/mouse_event_bub.html
+
 
         if ('ontouchstart' in document.documentElement) {
           var _ref;
@@ -6653,7 +6663,7 @@
    */
 
   var NAME$7 = 'popover';
-  var VERSION$7 = '5.0.0-alpha3';
+  var VERSION$7 = '5.0.0-beta1';
   var DATA_KEY$7 = 'bs.popover';
   var EVENT_KEY$7 = "." + DATA_KEY$7;
   var CLASS_PREFIX$1 = 'bs-popover';
@@ -6844,7 +6854,7 @@
    */
 
   var NAME$8 = 'scrollspy';
-  var VERSION$8 = '5.0.0-alpha3';
+  var VERSION$8 = '5.0.0-beta1';
   var DATA_KEY$8 = 'bs.scrollspy';
   var EVENT_KEY$8 = "." + DATA_KEY$8;
   var DATA_API_KEY$6 = '.data-api';
@@ -7146,7 +7156,7 @@
    */
 
   var NAME$9 = 'tab';
-  var VERSION$9 = '5.0.0-alpha3';
+  var VERSION$9 = '5.0.0-beta1';
   var DATA_KEY$9 = 'bs.tab';
   var EVENT_KEY$9 = "." + DATA_KEY$9;
   var DATA_API_KEY$7 = '.data-api';
@@ -7375,7 +7385,7 @@
    */
 
   var NAME$a = 'toast';
-  var VERSION$a = '5.0.0-alpha3';
+  var VERSION$a = '5.0.0-beta1';
   var DATA_KEY$a = 'bs.toast';
   var EVENT_KEY$a = "." + DATA_KEY$a;
   var EVENT_CLICK_DISMISS$1 = "click.dismiss" + EVENT_KEY$a;
@@ -7596,7 +7606,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.0-alpha3): index.umd.js
+   * Bootstrap (v5.0.0-beta1): index.umd.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
