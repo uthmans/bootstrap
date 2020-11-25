@@ -12,8 +12,9 @@ toc: true
 ### JavaScript
 
 - Data attributes for all JavaScript plugins are now namespaced to help distinguish Bootstrap functionality from third parties and your own code. For example, we use `data-bs-toggle` instead of `data-toggle`.
-- Moved from Popper.js v1 to Popper.js v2
-- Removed `offset` option from our Tooltip/Popover and Dropdown plugins; this can still be achieved using the `popperConfig` parameter.
+- Moved from Popper.js v1 to Popper.js v2:
+  - Removed `offset` option from our Tooltip/Popover and Dropdown plugins; this can still be achieved using the `popperConfig` parameter.
+  - The `fallbackPlacement` option has become `fallbackPlacements`.
 
 ### Sass
 
