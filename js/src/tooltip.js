@@ -54,6 +54,7 @@ const DefaultType = {
   container: '(string|element|boolean)',
   fallbackPlacement: '(string|array)',
   boundary: '(string|element)',
+  customClass: '(string|function)',
   sanitize: 'boolean',
   sanitizeFn: '(null|function)',
   allowList: 'object',
@@ -83,6 +84,7 @@ const Default = {
   container: false,
   fallbackPlacement: 'flip',
   boundary: 'scrollParent',
+  customClass: '',
   sanitize: true,
   sanitizeFn: null,
   allowList: DefaultAllowlist,
@@ -125,7 +127,7 @@ const TRIGGER_MANUAL = 'manual'
 class Tooltip {
   constructor(element, config) {
     if (typeof Popper === 'undefined') {
-      throw new TypeError('Bootstrap\'s tooltips require Popper.js (https://popper.js.org)')
+      throw new TypeError('Bootstrap\'s tooltips require Popper (https://popper.js.org)')
     }
 
     // private
@@ -295,6 +297,11 @@ class Tooltip {
       this._popper = new Popper(this.element, tip, this._getPopperConfig(attachment))
 
       tip.classList.add(CLASS_NAME_SHOW)
+
+      const customClass = typeof this.config.customClass === 'function' ? this.config.customClass() : this.config.customClass
+      if (customClass) {
+        tip.classList.add(...customClass.split(' '))
+      }
 
       // If this is a touch-enabled device we add extra
       // empty mouseover listeners to the body's immediate children;
